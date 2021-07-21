@@ -91,5 +91,16 @@ Spending time keeping your code clean is not just cost effective, it’s a matte
 
 #### Ward Cunningham, inventor of Wiki, inventor of Fit, coinventor of eXtreme Programming. Motive force behind Design Patterns. Smalltalk and OO thought leader. The godfather of all those who care about code.
 
-- When reading clean code, it turns out to be pretty much what you expected
-- 
+- When reading clean code, it turns out to be pretty much what you expected. It will be obvious, simple and compelling
+- Beautiful code makes the language look like it was made for the problem
+- It is the programmer responsibility to make the language look simple
+
+#### We Are Authors
+
+- Ratio of time spent reading vs writing should be over 10:1
+- We are constantly reading old code as part of the effort to write new code
+
+#### The Boy Scout Rule
+
+- The code has to be kept clean over time
+- Leave the campground cleaner than you found it
