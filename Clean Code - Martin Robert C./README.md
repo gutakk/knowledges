@@ -91,4 +91,5 @@ Spending time keeping your code clean is not just cost effective, it’s a matte
 
 #### Ward Cunningham, inventor of Wiki, inventor of Fit, coinventor of eXtreme Programming. Motive force behind Design Patterns. Smalltalk and OO thought leader. The godfather of all those who care about code.
 
+- When reading clean code, it turns out to be pretty much what you expected
 - 
