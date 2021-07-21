@@ -15,21 +15,21 @@ You are reading this book for two reasons. First, you are a **programmer**. Seco
 #### Case Study
 
 The company wrote the popular app and was used by a lot of professionals but the company went out of business a short time after release. The reasons are
-- They are in rush and made a huge mess in the code
-- The more features are added, the code gets worse
+- They are in rush and made a huge mess in the code.
+- The more features are added, the code gets worse.
 
 In conclusion, bad code can bring down the company
 
 #### Why did you write bad code?
 
-- You are trying to go fast and ignore the code quality
-- You are tired and want it to be over
-- You feel better to see the messy application running than nothing
+- You are trying to go fast and ignore the code quality.
+- You are tired and want it to be over.
+- You feel better to see the messy application running than nothing.
 
 ### The Total Cost of Owning a Mess
 
-- Productivity has been slowed down by a messy code
-- Over time the mess becomes so big and so deep and so tall, there is no way to clean up at all
+- Productivity has been slowed down by a messy code.
+- Over time the mess becomes so big and so deep and so tall, there is no way to clean up at all.
 
 #### The Grand Redesign in the Sky
 
@@ -37,21 +37,21 @@ Spending time keeping your code clean is not just cost effective, it’s a matte
 
 #### Attitude
 
-- The managers and marketers look to us for the information to make promises and commitments
-- The users look to us to validate the way the requirements will fit into the system
-- The project managers look to us to help work out the schedule
-- It is unprofessional for the programmers to write the code to align with the will of the managers who don't understand the risks of making messes
+- The managers and marketers look to us for the information to make promises and commitments.
+- The users look to us to validate the way the requirements will fit into the system.
+- The project managers look to us to help work out the schedule.
+- It is unprofessional for the programmers to write the code to align with the will of the managers who don't understand the risks of making messes.
 
 #### The Primal Conundrum
 
-- You will not make the deadline by making the mess
-- The only way to go fast is to keep the code as clean as possible all the time
+- You will not make the deadline by making the mess.
+- The only way to go fast is to keep the code as clean as possible all the time.
 
 #### The Art of Clean Code?
 
-- Writing clean code is a lot like painting a picture
-- Writing clean code requires discipline
-- A programmer with **code-sense** will look at a messy code and see options and variations
+- Writing clean code is a lot like painting a picture.
+- Writing clean code requires discipline.
+- A programmer with **code-sense** will look at a messy code and see options and variations.
 
 ### What is Clean Code?
 
@@ -104,3 +104,25 @@ Spending time keeping your code clean is not just cost effective, it’s a matte
 
 - The code has to be kept clean over time
 - Leave the campground cleaner than you found it
+
+## Chapter 2 - Meaningful Names
+
+### Use Intention-Revealing Names
+
+Variable name should tell you why it exists, what it does and how it is used. With a simple name, it is easy to understand what's going on.
+```java
+// Bad
+int d; // elapsed time in days
+
+// Good
+int elapsedTimeInDays;
+int daysSinceCreation;
+int fileAgeInDays
+```
+
+### Avoid Disinformation
+
+- Programmers must avoid leaving false clues that obscure the meaning of code. For example, `hp`, `aix` and `sco` because they are the names of Unix platforms or variants.
+- Don't use `accountList` refer the group of accounts unless it is actually a `List`. The word list means something specific to programmers. Use `accountGroup` or just plain `accounts` would be better.
+- Beware of using names which vary in small ways such as `XYZControllerForEfficientHandlingOfStrings` and `XYZControllerForEfficientStorageOfStrings`. It is difficult to spot the difference.
+- A truly awsful example of disinformative name would be lowercase `L` or uppercase `O` because they look almost entirely like the constants one and zero, respectively.
