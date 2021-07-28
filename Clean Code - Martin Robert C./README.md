@@ -126,3 +126,58 @@ int fileAgeInDays
 - Don't use `accountList` refer the group of accounts unless it is actually a `List`. The word list means something specific to programmers. Use `accountGroup` or just plain `accounts` would be better.
 - Beware of using names which vary in small ways such as `XYZControllerForEfficientHandlingOfStrings` and `XYZControllerForEfficientStorageOfStrings`. It is difficult to spot the difference.
 - A truly awsful example of disinformative name would be lowercase `L` or uppercase `O` because they look almost entirely like the constants one and zero, respectively.
+
+### Make Meaningful Distinctions
+
+### Use Pronounceable Names
+
+Name should be pronounceable. If you can’t pronounce it, you can’t discuss it without sounding like an idiot.
+
+### Use Searchable Names
+
+- Single-letter names can ONLY be used as local variables inside short methods.
+- The length of a name should correspond to the size of its scope.
+- Give a search friendly name for variable that might be seen or used in multiple places.
+
+### Avoid Encodings
+
+Encoded names are seldom pronounceable and are easy to mis-type.
+
+### Avoid Mental Mapping
+
+- Readers shouldn’t have to mentally translate your names into other names they already know.
+- Professional programmers use their powers for good and write code that others can understand.
+
+### Class Names
+
+- Classes and objects should have noun or noun phrase names like `Customer`, `WikiPage`, `Account`, and `AddressParser`.
+- Avoid words like `Manager`, `Processor`, `Data`, or `Info` in the name of a class. A class name should not be a verb.
+
+### Method Names
+
+- Methods should have verb or verb phrase names like `postPayment`, `deletePage`, or `save`.
+- Accessors, mutators, and predicates should be named for their value and prefixed with `get`, `set`, and `is`.
+
+### Don't be Cute
+
+- Never use name like `HolyHandGrenade`, it's cute but `DeleteItems` is definitely better name in this case.
+- Choose clarity over entertainment value.
+
+### Pick One Word per Concept
+
+- Pick one word for one abstract concept and stick with it. For example, it’s confusing to have `fetch`, `retrieve`, and `get` as equivalent methods of different classes.
+- A consistent lexicon is a great benefit to the programmers who must use your code.
+
+### Don't Pun
+
+Let’s say we have many classes where `add` will create a new value by adding or concatenating two existing values. Now let’s say we are writing a new class that has a method that puts its single parameter into a collection. We should use a name like `insert` or `append` instead of `add` in this case. To call the new method `add` would be a pun.
+
+### Use Solution Domain Names
+
+Remember that the people who read your code will be programmers. So go ahead and use computer science (CS) terms, algorithm names, pattern names, math terms, and so forth. It is not wise to draw every name from the problem domain because we don’t want our coworkers to have to run back and forth to the customer asking what every name means when they already know the concept by a different name.
+
+### Use Problem Domain Names
+
+When there is no `programmer-eese` for what you’re doing, use the name from the problem domain. At least the programmer who maintains your code can ask a domain expert what it means.
+
+### Add Meaningful Context
