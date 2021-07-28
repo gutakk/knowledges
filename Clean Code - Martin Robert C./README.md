@@ -188,3 +188,56 @@ When there is no `programmer-eese` for what you’re doing, use the name from th
 ### Don’t Add Gratuitous Context
 
 Shorter names are generally better than longer ones, so long as they are clear. Add no more context to a name than is necessary.
+
+## Chapter 3 - Functions
+
+### Small!
+
+- Functions should be small.
+- They should have no more than 4 lines of code.
+
+### Do One Thing
+
+Funtions should do one thing. They should do it well. They should do it only.
+
+### One Level of Abstraction per Function
+
+In order to make sure our functions are doing `one thing`, we need to make sure that the statements within our function are all at the same level of abstraction.
+
+### Reading Code from Top to Bottom: The Stepdown Rule
+
+We want to be able to read the program as though it were a set of TO paragraphs, each of which is describing the current level of abstraction and referencing subsequent TO paragraphs at the next level down. 
+
+```
+To include the setups and teardowns, we include setups, then we include the test page content, and then we include the teardowns.
+
+To include the setups, we include the suite setup if this is a suite, then we include the regular setup.
+
+To include the suite setup, we search the parent hierarchy for the “SuiteSetUp” page and add an include statement with the path of that page. To search the parent…
+```
+
+### Use Descriptive Names
+
+- Don’t be afraid to make a name long. A long descriptive name is better than a short mysterious name.
+- Don’t be afraid to spend time choosing a name.
+- Be consistent in your names. Use the same phrases, nouns, and verbs in the function names you choose for your modules.
+
+### Function Arguments
+
+- The ideal number of arguments for a function is zero.
+- More than 2 arguments should be avoided where possible.
+- When a function seems to need more than two or three arguments, it is likely that some of those arguments ought to be wrapped into a class of their own.
+  ```java
+  Circle makeCircle(double x, double y, double radius);
+  Circle makeCircle(Point center, double radius);
+  ```
+- Flag arguments are ugly. Passing a boolean into a function is a truly terrible practice. It loudly proclaiming that this function does more than one thing. It does one thing if the flag is true and another if the flag is false!
+C., Martin Robert. Clean Code (p. 113). Pearson Education. Kindle Edition. 
+
+C., Martin Robert. Clean Code (p. 113). Pearson Education. Kindle Edition. 
+
+C., Martin Robert. Clean Code (p. 111). Pearson Education. Kindle Edition. 
+
+C., Martin Robert. Clean Code (p. 109). Pearson Education. Kindle Edition. 
+
+C., Martin Robert. Clean Code (p. 109). Pearson Education. Kindle Edition. 
