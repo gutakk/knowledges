@@ -181,3 +181,10 @@ Remember that the people who read your code will be programmers. So go ahead and
 When there is no `programmer-eese` for what you’re doing, use the name from the problem domain. At least the programmer who maintains your code can ask a domain expert what it means.
 
 ### Add Meaningful Context
+
+- You need to place names in context for your reader by enclosing them in well-named classes, functions, or namespaces.
+- You can add context by using prefixes: `addrFirstName`, `addrLastName`, `addrState`, and so on. 
+
+### Don’t Add Gratuitous Context
+
+Shorter names are generally better than longer ones, so long as they are clear. Add no more context to a name than is necessary.
