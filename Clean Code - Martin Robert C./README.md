@@ -232,12 +232,29 @@ To include the suite setup, we search the parent hierarchy for the “SuiteSetUp
   Circle makeCircle(Point center, double radius);
   ```
 - Flag arguments are ugly. Passing a boolean into a function is a truly terrible practice. It loudly proclaiming that this function does more than one thing. It does one thing if the flag is true and another if the flag is false!
-C., Martin Robert. Clean Code (p. 113). Pearson Education. Kindle Edition. 
 
-C., Martin Robert. Clean Code (p. 113). Pearson Education. Kindle Edition. 
+### Have No Side Effects
 
-C., Martin Robert. Clean Code (p. 111). Pearson Education. Kindle Edition. 
+Side effects are lies. Your function promises to do one thing, but it also does other hidden things. Sometimes it will make unexpected changes to the variables of its own class.
 
-C., Martin Robert. Clean Code (p. 109). Pearson Education. Kindle Edition. 
+### Command Query Separation
 
-C., Martin Robert. Clean Code (p. 109). Pearson Education. Kindle Edition. 
+Functions should either do something or answer something, but not both. Either your function should change the state of an object, or it should return some information about that object. Doing both often leads to confusion.
+
+### Prefer Exceptions to Returning Error Codes
+
+- Returning error codes from command functions is a subtle violation of command query separation.
+- If you use exceptions instead of returned error codes, then the error processing code can be separated from the happy path code and can be simplified.
+- Try/catch blocks are ugly in their own right. They confuse the structure of the code and mix error processing with normal processing. So it is better to extract the bodies of the try and catch blocks out into functions of their own.
+
+### Don't Repeat Yourself (DRY)
+
+- Duplication may be the root of all evil in software.
+- Duplication is a problem because it bloats the code and will require more than one modification should the algorithm ever have to change. It is also a more than one opportunity for an error of omission.
+
+### Structured Programming
+
+There should only be one `return` statement in a function, no `break` or `continue` statements in a loop, and never ever any `goto` statements.
+
+## Chapter 4 - Comments
+
