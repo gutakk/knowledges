@@ -258,3 +258,120 @@ There should only be one `return` statement in a function, no `break` or `contin
 
 ## Chapter 4 - Comments
 
+The proper use of comments is to compensate for our failure to express ourself in code. So when you find yourself in a position where you need to write a comment, think it through and see whether there isn’t some way to turn the tables and express yourself in code.
+
+### Comments Do Not Make Up for Bad Code
+
+Clear and expressive code with few comments is far superior to cluttered and complex code with lots of comments.
+
+### Explain Yourself in Code
+
+It takes only a few seconds of thought to explain most of your intent in code. In many cases it’s simply a matter of creating a function that says the same thing as the comment you want to write.
+
+```java
+// Bad
+// Check to see if the employee is eligible for full benefits
+   if ((employee.flags & HOURLY_FLAG) &&
+       (employee.age > 65))
+
+// Good
+if (employee.isEligibleForFullBenefits())
+```
+
+### Good Comments
+
+#### Legal Comments
+
+Sometimes our corporate coding standards force us to write certain comments for legal reasons. For example, copyright and authorship statements are necessary and reasonable things to put into a comment at the start of each source file.
+
+#### Informative Comments
+
+It is sometimes useful to provide basic information with a comment. For example, comment that explains the return value of an abstract method
+```java
+// format matched kk:mm:ss EEE, MMM dd, yyyy
+Pattern timeMatcher = Pattern.compile(“\\d*:\\d*:\\d* \\w*, \\w* \\d*, \\d*”);
+```
+
+#### Explanation of Intent
+
+Sometimes a comment goes beyond just useful information about the implementation and provides the intent behind a decision.
+
+#### Clarification
+
+Sometimes it is just helpful to translate the meaning of some obscure argument or return value into something that’s readable. When its part of the standard library, or in code that you cannot alter, then a helpful clarifying comment can be useful.
+
+#### Warning of Consequences
+
+Sometimes it is useful to warn other programmers about certain consequences. For example, a comment that explains why a particular test case is turned off.
+
+#### TODO Comments
+
+It is sometimes reasonable to leave `To do` notes in the form of `//TODO` comments. In the following case, the TODO comment explains why the function has a degenerate implementation and what that function’s future should be.
+
+#### Amplification
+
+A comment may be used to amplify the importance of something that may otherwise seem inconsequential.
+
+### Bad Comments
+
+#### Mumbling
+
+Plopping in a comment just because you feel you should or because the process requires it is a hack. If you decide to write a comment, then spend the time to make sure it is the best comment you can write.
+
+#### Redundant Comments
+
+Avoid the comment that not more informative than the code. The comment probably takes longer to read than the code itself.
+
+#### Misleading Comments
+
+Sometimes, with all the best intentions, a programmer makes a statement in his comments that isn’t precise enough to be accurate.
+
+#### Mandated Comments
+
+It is just plain silly to have a rule that says that every function must have a javadoc, or every variable must have a comment. Comments like this just clutter up the code, propagate lies, and lend to general confusion and disorganization.
+
+#### Journal Comments
+
+Long ago we didn’t have source code control systems that did log of every change that has ever been made for us. Nowadays, however, these long journals are just more clutter to obfuscate the module. They should be completely removed.
+
+#### Noise Comments
+
+Sometimes you see comments that are nothing but noise. They restate the obvious and provide no new information.
+```java
+/** The day of the month. */
+private int dayOfMonth;
+```
+
+#### Don’t Use a Comment When You Can Use a Function or a Variable
+
+```java
+// Bad
+// does the module from the global list <mod> depend on the
+// subsystem we are part of?
+if (smodule.getDependSubsystems().contains(subSysMod.getSubSystem()))
+
+// Good
+ArrayList moduleDependees = smodule.getDependSubsystems();
+String ourSubSystem = subSysMod.getSubSystem();
+if (moduleDependees.contains(ourSubSystem))
+```
+
+#### Position Markers
+
+Sometimes programmers like to mark a particular position in a source file. For example
+```java
+// Actions //////////////////////////////////
+```
+
+#### Closing Brace Comments
+
+This might make sense for long functions with deeply nested structures but if you find yourself wanting to mark your closing braces, try to shorten your functions instead.
+```java
+// Bad
+try {
+  while {
+    ...
+  } // while
+  ...
+} // try
+```
