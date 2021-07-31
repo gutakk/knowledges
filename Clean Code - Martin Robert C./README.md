@@ -443,3 +443,5 @@ Hiding implementation is not just a matter of putting a layer of functions betwe
 
 #### The Law of Demeter
 
+- Module should not know about the innards of the objects it manipulates.
+- 
