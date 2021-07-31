@@ -428,3 +428,18 @@ Short functions don’t need much description. A well-chosen name for a small fu
 #### Team Rules
 
 A team of developers should agree upon a single formatting style, and then every member of that team should use that style.
+
+### Chapter 6 - Objects and Data Structures
+
+#### Data Abstraction
+
+Hiding implementation is not just a matter of putting a layer of functions between the variables. Hiding implementation is about abstractions! A class does not simply push its variables out through getters and setters. Rather it exposes abstract interfaces that allow its users to manipulate the `essence` of the data, without having to know its implementation.
+
+#### Data/Object Anti-Symmetry
+
+- Objects hide their data behind abstractions and expose functions that operate on that data. Data structure expose their data and have no meaningful functions.
+- Procedural code (code using data structures) makes it easy to add new functions without changing the existing data structures.
+- OO code, on the other hand, makes it easy to add new classes without changing existing functions.
+
+#### The Law of Demeter
+
