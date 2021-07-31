@@ -375,3 +375,56 @@ try {
   ...
 } // try
 ```
+
+#### Attributions and Bylines
+
+```java
+/* Added by Thiramate A */
+```
+Source code control systems are very good at remembering who added what, when. There is no need to pollute the code with little bylines.
+
+#### Commented-Out Code
+
+Some practices are as odious as commenting-out code. Don’t do this!
+
+#### HTML Comments
+
+HTML in source code comments is an abomination. It makes the comments hard to read in the one place where they should be easy to read.
+
+#### Nonlocal Information
+
+If you must write a comment, then make sure it describes the code it appears near. Don’t offer systemwide information in the context of a local comment.
+
+#### Too Much Information
+
+Don’t put interesting historical discussions or irrelevant descriptions of details into your comments.
+
+#### Inobvious Connection
+
+The connection between a comment and the code it describes should be obvious. If you are going to the trouble to write a comment, then at least you’d like the reader to be able to look at the comment and the code and understand what the comment is talking about.
+
+#### Function Headers
+
+Short functions don’t need much description. A well-chosen name for a small function that does one thing is usually better than a comment header.
+
+### Chapter 5 - Formatting
+
+#### Vertical Formatting
+
+- Small files are usually easier to understand than large files are.
+- We would like a source file to be like a newspaper article. The topmost parts of the source file should provide the high-level concepts and algorithms. Detail should increase as we move downward, until at the end we find the lowest level functions and details in the source file.
+- Each line represents an expression or a clause, and each group of lines represents a complete thought. Those thoughts should be separated from each other with blank lines.
+- Concepts that are closely related should be kept vertically close to each other and belong in the same source file.
+- Variables should be declared as close to their usage as possible.
+- Instance variables should be declared at the top of the class.
+- Dependent Functions. If one function calls another, they should be vertically close, and the caller should be above the callee.
+
+#### Horizontal Formatting
+
+- Lines should not be longer than 120 characters.
+- Use horizontal white space to associate things that are strongly related and disassociate things that are more weakly related.
+- Indent the lines of source code in proportion to their position in the hiearchy.
+
+#### Team Rules
+
+A team of developers should agree upon a single formatting style, and then every member of that team should use that style.
