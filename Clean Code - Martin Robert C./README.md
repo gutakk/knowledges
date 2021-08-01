@@ -407,9 +407,9 @@ The connection between a comment and the code it describes should be obvious. If
 
 Short functions don’t need much description. A well-chosen name for a small function that does one thing is usually better than a comment header.
 
-### Chapter 5 - Formatting
+## Chapter 5 - Formatting
 
-#### Vertical Formatting
+### Vertical Formatting
 
 - Small files are usually easier to understand than large files are.
 - We would like a source file to be like a newspaper article. The topmost parts of the source file should provide the high-level concepts and algorithms. Detail should increase as we move downward, until at the end we find the lowest level functions and details in the source file.
@@ -419,29 +419,204 @@ Short functions don’t need much description. A well-chosen name for a small fu
 - Instance variables should be declared at the top of the class.
 - Dependent Functions. If one function calls another, they should be vertically close, and the caller should be above the callee.
 
-#### Horizontal Formatting
+### Horizontal Formatting
 
 - Lines should not be longer than 120 characters.
 - Use horizontal white space to associate things that are strongly related and disassociate things that are more weakly related.
 - Indent the lines of source code in proportion to their position in the hiearchy.
 
-#### Team Rules
+### Team Rules
 
 A team of developers should agree upon a single formatting style, and then every member of that team should use that style.
 
-### Chapter 6 - Objects and Data Structures
+## Chapter 6 - Objects and Data Structures
 
-#### Data Abstraction
+### Data Abstraction
 
 Hiding implementation is not just a matter of putting a layer of functions between the variables. Hiding implementation is about abstractions! A class does not simply push its variables out through getters and setters. Rather it exposes abstract interfaces that allow its users to manipulate the `essence` of the data, without having to know its implementation.
 
-#### Data/Object Anti-Symmetry
+### Data/Object Anti-Symmetry
 
 - Objects hide their data behind abstractions and expose functions that operate on that data. Data structure expose their data and have no meaningful functions.
 - Procedural code (code using data structures) makes it easy to add new functions without changing the existing data structures.
 - OO code, on the other hand, makes it easy to add new classes without changing existing functions.
 
-#### The Law of Demeter
+### The Law of Demeter
 
 - Module should not know about the innards of the objects it manipulates.
-- 
+- The Law of Demeter says that a method `f` of a class `C` should only call the methods of these
+  - C
+  - An object created by `f`
+  - An object passed as an argument to `f`
+  - An object held in an instance variable of `C`
+
+## Chapter 7 - Error Handling
+
+### Use Exceptions Rather Than Return Code
+
+It is better to throw an exception when you encounter an error. The calling code is cleaner. Its logic is not obscured by error handling.
+
+### Write Your Try-Catch-Finally Statement First
+
+Try blocks are like transactions. Your catch has to leave your program in a consistent state, no matter what happens in the try. For this reason it is good practice to start with a try-catch-finally statement when you are writing code that could throw exceptions. This helps you define what the user of that code should expect, no matter what goes wrong with the code that is executed in the try.
+
+### Use Unchecked Exceptions
+
+Checked exceptions can sometimes be useful if you are writing a critical library: You must catch them. But in general application development the dependency costs outweigh the benefits.
+
+### Provide Context with Exceptions
+
+- Each exception that you throw should provide enough context to determine the source and location of an error.
+- Create informative error messages and pass them along with your exceptions. Mention the operation that failed and the type of failure.
+- If you are logging in your application, pass along enough information to be able to log the error in your catch.
+
+### Define Exception Classes in Terms of a Caller’s Needs
+
+- Wrapping third-party APIs is a best practice. When you wrap a third-party API, you minimize your dependencies upon it.
+- Wrapping also makes it easier to mock out third-party calls when you are testing your own code.
+
+### Define the Normal Flow
+
+- You wrap external APIs so that you can throw your own exceptions, and you define a handler above your code so that you can deal with any aborted computation.
+
+```java
+// Bad
+try {
+  MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
+  m_total += expenses.getTotal();
+} catch(MealExpensesNotFound e) {
+  m_total += getMealPerDiem();
+}
+
+// Good
+MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
+m_total += expenses.getTotal();
+```
+
+### Don't Return Null
+
+- When we return null, we are essentially creating work for ourselves and foisting problems upon our callers. All it takes is one missing null check to send an application spinning out of control.
+- If you are tempted to return null from a method, consider throwing an exception or returning a SPECIAL CASE object instead.
+- If you are calling a null-returning method from a third-party API, consider wrapping that method with a method that either throws an exception or returns a special case object.
+
+### Don't Pass Null
+
+Returning null from methods is bad, but passing null into methods is worse. Unless you are working with an API which expects you to pass null, you should avoid passing null in your code whenever possible.
+
+## Chapter 8 - Boundaries
+
+### Using Third-Party Code
+
+- There is a natural tension between the provider of an interface and the user of an interface. Providers of third-party packages and frameworks strive for broad applicability so they can work in many environments and appeal to a wide audience.
+- audience. Users, on the other hand, want an interface that is focused on their particular needs. This tension can cause problems at the boundaries of our systems.
+
+```java
+// Non generic
+Map sensors = new HashMap();
+Sensor s = (Sensor)sensors.get(sensorId);
+
+// Generic
+Map<Sensor> sensors = new HashMap<Sensor>();
+Sensor s = sensors.get(sensorId);
+
+// Cleaner
+public class Sensors {
+  private Map sensors = new HashMap();
+  public Sensor getById(String id) {
+    return (Sensor) sensors.get(id);
+  }
+  //snip
+}
+```
+
+### Exploring and Learning Boundaries
+
+- It’s not our job to test the third-party code, but it may be in our best interest to write tests for the third-party code we use.
+- Instead of experimenting and trying out the new stuff in our production code, we could write some tests to explore our understanding of the third-party code.
+
+### Learning Tests Are Better Than Free
+
+- The learning tests were precise experiments that helped increase our understanding.
+- Learning tests verify that the third-party packages we are using work the way we expect them to.
+
+### Clean Boundaries
+
+- Code at the boundaries needs clear separation and tests that define expectations.
+- We should avoid letting too much of our code know about the third-party particulars.
+- It’s better to depend on something you control than on something you don’t control.
+
+## Chapter 9 - Unit Tests
+
+### The Three Laws of TDD
+
+- **First Law**: You may not write production code until you have written a failing unit test.
+- **Second Law**: You may not write more of a unit test than is sufficient to fail, and not compiling is failing.
+- **Third Law**: You may not write more production code than is sufficient to pass the currently failing test.
+
+### Keeping Tests Clean
+
+- Test code is just as important as production code.
+- It requires thought, design, and care.
+- It must be kept as clean as production code.
+
+#### Tests Enable the -ilities
+
+- If you don’t keep your tests clean, you will lose them.
+- Unit tests that keep our code flexible, maintainable, and reusable.
+- If you have tests, you do not fear making changes to the code!
+- If your tests are dirty, then your ability to change your code is hampered.
+
+### Clean Tests
+
+- What makes a clean test? Three things. Readability, readability, and readability. Readability is perhaps even more important in unit tests than it is in production code.
+- What makes tests readable? clarity, simplicity, and density of expression. In a test you want to say a lot with as few expressions as possible.
+```java
+public void testGetPageHieratchyAsXml() throws Exception {
+  crawler.addPage(root, PathParser.parse(“PageOne”));
+  crawler.addPage(root, PathParser.parse(“PageOne.ChildOne”));
+  crawler.addPage(root, PathParser.parse(“PageTwo”));
+  
+  request.setResource(“root”);
+  request.addInput(“type”, “pages”);
+  Responder responder = new SerializedPageResponder();
+  SimpleResponse response = (SimpleResponse) responder.makeResponse(new FitNesseContext(root), request);
+  String xml = response.getContent();
+  
+  assertEquals(“text/xml”, response.getContentType());
+  assertSubString(“<name>PageOne</name>”, xml);
+  assertSubString(“<name>PageTwo</name>”, xml);
+  assertSubString(“<name>ChildOne</name>”, xml);
+}
+
+// Refactored
+public void testGetPageHierarchyAsXml() throws Exception {
+  makePages(“PageOne”, “PageOne.ChildOne”, “PageTwo”);
+  
+  submitRequest(“root”, “type:pages”);
+  
+  assertResponseIsXML();
+  assertResponseContains(
+    “<name>PageOne</name>”, “<name>PageTwo</name>”, “<name>ChildOne</name>”
+  );
+}
+```
+
+### Domain-Specific Testing Language
+
+Rather than using the APIs that programmers use to manipulate the system, we build up a set of functions and utilities that make use of those APIs and that make the tests more convenient to write and easier to read. These functions and utilities become a specialized API used by the tests.
+
+### One Assert Per Test
+
+- Tests come to a single conclusion that is quick and easy to understand.
+- Best thing we can say is that the number of asserts in a test ought to be minimized.
+- Perhaps a better rule is that we want to test a single concept in each test function. We don’t want long test functions that go testing one miscellaneous thing after another.
+
+### F.I.R.S.T
+
+- **Fast**: Tests should be fast so you can run them frequently.
+- **Independent**: Tests should not depend on each other. One test should not set up the conditions for the next test.
+- **Repeatable**: Tests should be repeatable in any environment even on your laptop without network.
+- **Self-Validating**: Tests should have a boolean output.
+- **Timely**: Unit tests should be written just before the production code that makes them pass.
+
+## Chapter 10 - Classes
