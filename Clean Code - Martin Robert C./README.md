@@ -667,3 +667,47 @@ Classes should depend on abstractions, not concrete details.
 
 ## Chapter 11 - Systems
 
+### Separate Constructing a System from Using It
+
+Software systems should separate the startup process, when the application objects are constructed and the dependencies are “wired” together, from the runtime logic that takes over after startup. For example
+
+```java
+public Service getService() {
+  if (service == null)
+    service = new MyServiceImpl(…); // Good enough default for most cases?
+  return service;
+}
+```
+
+This is the **LAZY INITIALIZATION/EVALUATION** idiom, and it has several merits. We don’t get the overhead of construction unless we actually use the object, and our startup times can be faster as a result. We also ensure that null is never returned. However, we now have a hard-coded dependency on `MyServiceImpl` and everything its constructor requires. We can’t compile without resolving these dependencies, even if we never actually use an object of this type at runtime!
+
+#### Separation of Main
+
+One way to separate construction from use is simply to move all aspects of construction to main, or modules called by main.
+
+#### Dependency Injection
+
+- In the context of dependency management, an object should not take responsibility for instantiating dependencies itself. 
+- Instead, it should pass this responsibility to another “authoritative” mechanism, thereby inverting the control.
+
+### Scaling Up
+
+- We should implement only today’s stories, then refactor and expand the system to implement new stories tomorrow. This is the essence of iterative and incremental agility.
+- Test-driven development, refactoring, and the clean code they produce make this work at the code level.
+- Software systems are unique compared to physical systems. Their architectures can grow incrementally, if we maintain the proper separation of concerns.
+
+### Test Drive the System Architecture
+
+An optimal system architecture consists of modularized domains of concern, each of which is implemented with Plain Old Java (or other) Objects. The different domains are integrated together with minimally invasive Aspects or Aspect-like tools. This architecture can be test-driven, just like the code.
+
+### Optimize Decision Making
+
+- Modularity and separation of concerns make decentralized management and decision making possible.
+- It isn’t lazy or irresponsible to postpone decisions until the last possible moment. It lets us make informed choices with the best possible information. A premature decision is a decision made with suboptimal knowledge.
+
+### Use Standards Wisely, When They Add Demonstrable Value
+
+- Standards make it easier to reuse ideas and components, recruit people with relevant experience, encapsulate good ideas, and wire components together.
+- However, the process of creating standards can sometimes take too long for industry to wait, and some standards lose touch with the real needs of the adopters they are intended to serve.
+
+### Systems Need Domain-Specific Languages
