@@ -620,3 +620,50 @@ Rather than using the APIs that programmers use to manipulate the system, we bui
 - **Timely**: Unit tests should be written just before the production code that makes them pass.
 
 ## Chapter 10 - Classes
+
+### Class Organization
+
+- Following the standard Java convention, class should begin with list of variables.
+  1. Public static constants
+  2. Private static variables
+  3. Private instance variables
+- Then follow by the functions
+  1. Public functions
+  2. Private functions
+
+#### Encapsulation
+
+Variables and utility functions should be private but we can make them protected sometimes so that they can be accessed by a test from the same package.
+
+### Classes Should Be Small!
+
+- Count **responsibilities**
+- The more ambiguous the class name, the more likely it has too many responsibilities. For example `Processor` or `Manager`.
+- We should write a brief description of the class in about 25 words, without using the words `if`, `and` `or` or `but`.
+
+#### The Single Responsibility Principle
+
+- Class or module should have one and only `reason to change`.
+- System with many small classes are better than a system with a few large classes. For example, do you want your tools organized into toolboxes with many small drawers but containing well-defined and well-labeled components or few drawers that you just toss everything into?
+
+#### Cohesion
+
+- The more variables a method manipulates the more cohesive that method is to its class.
+- When cohesion is high, the methods and variables of the class are co-dependent and hang together as a logical whole.
+
+#### Maintaining Cohesion Results in Many Small Classes
+
+- When classes lose cohesion, split them!
+- Breaking a large function into many smaller functions often gives us the opportunity to split several smaller classes out as well.
+
+### Organizing for Change
+
+- We should not modify classes, extend them instead to reduce the risk of breaking other code in the class.
+- We want to structure our systems so that we muck with as little as possible when we update them with new or changed features.
+
+#### Isolating from Change
+
+Classes should depend on abstractions, not concrete details.
+
+## Chapter 11 - Systems
+
