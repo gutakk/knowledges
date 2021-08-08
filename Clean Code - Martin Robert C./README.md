@@ -822,3 +822,112 @@ Think about shut-down early and get it working early. It’s going to take longe
 These 3 chapters are Java code example and case studies
 
 ## Chapter 17 - Smells and Heuristics
+
+### Comments
+
+#### C1: Inappropriate Information
+
+It is inappropriate for a comment to hold information better held in a different kind of system such as your source code control system, your issue tracking system, or any other record-keeping system.
+
+#### C2: Obsolete Comment
+
+Comments get old quickly. It is best not to write a comment that will become obsolete. If you find an obsolete comment, it is best to update it or get rid of it as quickly as possible.
+
+#### C3: Redundant Comment
+
+A comment is redundant if it describes something that already describes itself. For example: `i++; // increment i`
+
+#### C4: Poorly Written Comment
+
+If you are going to write a comment, take the time to make sure it is the best comment you can write. Choose your words carefully. Use correct grammar and punctuation.
+
+#### C5: Commented-Out code
+
+Commented-out code is an abomination. When you see commented-out code, delete it! Don’t worry, the source code control system still remembers it.
+
+### Environment
+
+#### E1: Build Requires More Than One Step
+
+Building a project should be a single trivial operation. You should not have to check many little pieces out from source code control. 
+
+#### E2: Tests Require More Than One Step
+
+You should be able to run all the unit tests with just one command. In the best case you can run all the tests by clicking on one button in your IDE. In the worst case you should be able to run a single simple command in a shell.
+
+### Functions
+
+#### F1: Too Many Arguments
+
+Functions should have a small number of arguments. No argument is best. More than three is very questionable and should be avoided.
+
+#### F2: Output Arguments
+
+Output arguments are counterintuitive. Readers expect arguments to be inputs, not outputs. If your function must change the state of something, have it change the state of the object it is called on.
+
+#### F3: Flag Arguments
+
+Boolean arguments declare that the function does more than one thing. They are confusing and should be eliminated.
+
+#### F4: Dead Function
+
+Methods that are never called should be discarded.
+
+### General
+
+#### G1: Multiple Languages in One Source File
+
+The ideal is a source file to contain one, and only one, language.
+
+#### G2: Obvious Behavior Is Unimplemented
+
+Following “The Principle of Least Surprise”, any function or class should implement the behaviors that another programmer could reasonably expect.
+
+#### G3: Incorrect Behavior at the Boundaries
+
+There is no replacement for due diligence. Every boundary condition, every corner case, every quirk and exception represents something that can confound an elegant and intuitive algorithm. Don’t rely on your intuition. Look for every boundary condition and write a test for it.
+
+#### G4: Overridden Safeties
+
+Turning off certain compiler warnings (or all warnings!) may help you get the build to succeed, but at the risk of endless debugging sessions. Turning off failing tests and telling yourself you’ll get them to pass later is as bad as pretending your credit cards are free money.
+
+#### G5: Duplication
+
+- This is one of the most important rules in this book, and you should take it very seriously.
+- Every time you see duplication in the code, it represents a missed opportunity for abstraction.
+- The most obvious form of duplication is when you have clumps of identical code that look like some programmers went wild with the mouse, pasting the same code over and over again. These should be replaced with simple methods.
+
+#### G6: Code at Wrong Level of Abstraction
+
+- It is important to create abstractions that separate higher level general concepts from lower level detailed concepts. For example, constants, variables, or utility functions that pertain only to the detailed implementation should not be present in the base class. The base class should know nothing about them.
+- Isolating abstractions is one of the hardest things that software developers do, and there is no quick fix when you get it wrong.
+
+#### G7: Base Classes Depending on Their Derivatives
+
+The most common reason for partitioning concepts into base and derivative classes is so that the higher level base class concepts can be independent of the lower level derivative class concepts. Therefore, when we see base classes mentioning the names of their derivatives, we suspect a problem. In general, base classes should know nothing about their derivatives.
+
+#### G8: Too Much Information
+
+- Well-defined modules have very small interfaces that allow you to do a lot with a little.
+- Hide your data, utility functions, constants and your temporaries.
+- Don’t create classes with lots of methods or instance variables.
+- Don’t create lots of protected variables and functions for your subclasses.
+- Concentrate on keeping interfaces very tight and very small. Help keep coupling low by limiting information.
+
+#### G9: Dead Code
+
+The problem with dead code is that after awhile it starts to smell. This is because dead code is not completely updated when designs change. It still compiles, but it does not follow newer conventions or rules. When you find dead code, delete it from the system.
+
+#### G10: Vertical Separation
+
+- Variables and function should be defined close to where they are used.
+- Local variables should be declared just above their first usage and should have a small vertical scope.
+- Private functions should be defined just below their first usage. Private functions belong to the scope of the whole class, but we’d still like to limit the vertical distance between the invocations and definitions. Finding a private function should just be a matter of scanning downward from the first usage.
+
+#### G11: Inconsistency
+
+- If you do something a certain way, do all similar things in the same way.
+- Be careful with the conventions you choose, and once chosen, be careful to continue to follow them.
+
+#### G12: Clutter
+
