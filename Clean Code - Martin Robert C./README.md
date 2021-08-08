@@ -1,4 +1,4 @@
-# Clean Code by Martin Robert C.
+# Clean Code by Martin C. Robert
 Summarized by Thiramate A.
 
 ## Chapter 1 - Clean Code
