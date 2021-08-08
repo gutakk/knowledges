@@ -931,3 +931,152 @@ The problem with dead code is that after awhile it starts to smell. This is beca
 
 #### G12: Clutter
 
+Variables that aren’t used, functions that are never called, comments that add no information, and so on. All these things are clutter and should be removed.
+
+#### G13: Artificial Coupling
+
+In general an artificial coupling is a coupling between two modules that serves no direct purpose. It is a result of putting a variable, constant, or function in a temporarily convenient, though inappropriate, location. This is lazy and careless.
+
+#### G14: Feature Envy
+
+When a method uses accessors and mutators of some other object to manipulate the data within that object, then it `envies` the scope of the class of that other object. It wishes that it were inside that other class so that it could have direct access to the variables that manipulating.
+
+#### G15: Selector Arguments
+
+Selector arguments is difficult to remember and each selector argument combines many function into one. Selector arguments are just a lazy way to avoid splitting a large function into several smaller functions.
+
+#### G16: Obscured Intent
+
+We want code to be as expressive as possible. It is worth taking the time to make the intent of our code visible to our readers.
+
+#### G17: Misplaced Responsibility
+
+One of the most important decisions a software developer can make is where to put code. The principle of least surprise comes into play here. Code should be placed where a reader would naturally expect it to be. One way to make this decision is to look at the names of the functions.
+
+#### G18: Inappropriate Static
+
+In general you should prefer nonstatic methods to static methods. When in doubt, make the function nonstatic. If you really want a function to be static, make sure that there is no chance that you’ll want it to behave polymorphically.
+
+#### G19: Use Explanatory Variables
+
+One of the most powerful ways to make a program readable is to break the calculations up into intermediate values that are held in variables with meaningful names.
+
+#### G20: Function Names Should Say What They Do
+
+If you have to look at the implementation (or documentation) of the function to know what it does, then you should work to find a better name or rearrange the functionality so that it can be placed in functions with better names.
+
+#### G21: Understand the Algorithm
+
+- Before you consider yourself to be done with a function, make sure you understand how it works. It is not good enough that it passes all the tests. You must know that the solution is correct.
+- The best way to gain this knowledge and understanding is to refactor the function into something that is so clean and expressive that it is obvious how it works.
+
+#### G22: Make Logical Dependencies Physical
+
+If one module depends upon another, that dependency should be physical, not just logical. The dependent module should not make assumptions (in other words, logical dependencies) about the module it depends upon. Rather it should explicitly ask that module for all the information it depends upon.
+
+#### G23: Prefer Polymorphism to If/Else or Switch/Case
+
+`ONE SWITCH` rule: There may be no more than one switch statement for a given type of selection. The cases in that switch statement must create polymorphic objects that take the place of other such switch statements in the rest of the system.
+
+#### G24: Follow Standard Conventions
+
+- Every team should follow a coding standard based on common industry convention.
+- This coding standard should specify things like where to declare instance variables; how to name classes, methods, and variables; where to put braces; and so on.
+- The team should not need a document to describe these conventions because their code provides the examples.
+
+#### G25: Replace Magic Numbers with Named Constants
+
+In general it is a bad idea to have raw numbers in your code. You should hide them behind well-named constants.
+
+#### G26: Be Precise
+
+When you make a decision in your code, make sure you make it `precisely`. Know why you have made it and how you will deal with any exceptions. Don’t be lazy about the precision of your decisions. For example, if you decide to call a function that might return null, make sure you check for null.
+
+#### G27: Structure over Convention
+
+Enforce design decisions with structure over convention. Naming conventions are good, but they are inferior to structures that force compliance.
+
+#### G28: Encapsulate Conditionals
+
+Boolean logic is hard enough to understand without having to see it in the context of an if or while statement. Extract functions that explain the intent of the conditional.
+
+```java
+// Bad
+if (shouldBeDeleted(timer))
+
+// Good
+if (timer.hasExpired() && !timer.isRecurrent())
+```
+
+#### G29: Avoid Negative Conditionals
+
+Negatives are just a bit harder to understand than positives. So, when possible, conditionals should be expressed as positives.
+
+```java
+// Bad
+if (buffer.shouldCompact())
+
+// Good
+if (!buffer.shouldNotCompact())
+```
+
+#### G30: Functions Should Do One Thing
+
+Functions that do more than one thing should be converted into many smaller functions, each of which does one thing.
+
+#### G31: Hidden Temporal Couplings
+
+Temporal couplings are often necessary, but you should not hide the coupling. Structure the arguments of your functions such that the order in which they should be called is obvious.
+
+#### G32: Don't Be Arbitrary
+
+Have a reason for the way you structure your code, and make sure that reason is communicated by the structure of the code. If a structure appears arbitrary, others will feel empowered to change it. If a structure appears consistently throughout the system, others will use it and preserve the convention.
+
+#### G33: Encapsulate Boundary Conditions
+
+Boundary conditions are hard to keep track of. Put the processing for them in one place. Don’t let them leak all over the code.
+
+#### G34: Functions Should Descend Only One Level of Abstraction
+
+The statements within a function should all be written at the same level of abstraction, which should be one level below the operation described by the name of the function.
+
+#### G35: Keep Configurable Data at High Levels
+
+If you have a constant such as a default or configuration value that is known and expected at a high level of abstraction, do not bury it in a low-level function. Expose it as an argument to that low-level function called from the high-level function.
+
+#### G36: Avoid Transitive Navigation
+
+In general we don’t want a single module to know much about its collaborators. More specifically, if A collaborates with B, and B collaborates with C, we don’t want modules that use A to know about C. If many modules used some form of the statement `a.getB().getC()`, then it would be difficult to change the design and architecture to interpose a Q between B and C.
+
+### Names
+
+#### N1: Choose Descriptive Names
+
+Don’t be too quick to choose a name. Make sure the name is descriptive. Remember that meanings tend to drift as software evolves, so frequently reevaluate the appropriateness of the names you choose. You need to take the time to choose them wisely and keep them relevant.
+
+#### N2: Choose Names at the Appropriate Level of Abtraction
+
+Don’t pick names that communicate implementation. Instead, choose names the reflect the level of abstraction of the class or function you are working in.
+
+#### N3: Use Standard Nomenclature Where Possible
+
+Names are easier to understand if they are based on existing convention or usage. For example, if you are using the `DECORATOR` pattern, you should use the word Decorator in the names of the decorating classes.
+
+#### N4: Unambiguous Names
+
+Choose names that describes how function work.
+
+#### N5: Use Long Names for Long Scope
+
+The length of a name should be related to the length of the scope. You can use very short variable names for tiny scopes, but for big scopes you should use longer names. Variable names like `i` and `j` are just fine if their scope is five lines long.
+
+#### N6: Avoid Encodings
+
+Names should not be encoded with type or scope information. Prefixes such as `m_` or `f` are useless.
+
+#### N7: Names Should Describe Side-Effects
+
+- Names should describe everything that a function, variable, or class is or does. Don’t hide side effects with a name.
+- Don’t use a simple verb to describe a function that does more than just that simple action.
+
+### Tests
