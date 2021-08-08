@@ -711,3 +711,44 @@ An optimal system architecture consists of modularized domains of concern, each 
 - However, the process of creating standards can sometimes take too long for industry to wait, and some standards lose touch with the real needs of the adopters they are intended to serve.
 
 ### Systems Need Domain-Specific Languages
+
+- A good DSL minimizes the `communication gap` between a domain concept and the code that implements it, just as agile practices optimize the communications within a team and with the project’s stakeholders.
+- DSLs, when used effectively, raise the abstraction level above code idioms and design patterns. They allow the developer to reveal the intent of the code at the appropriate level of abstraction.
+
+## Chapter 12 - Emergence
+
+### Getting Clean via Emergent Design
+
+According to Kent Beck, a design is "simple" if it follows these rules (The rules are given in order of importance):
+- Runs all the tests.
+- Contains no duplication.
+- Expresses the intent of the programmer.
+- Minimizes the number of classes and methods.
+
+### Simple Design Rule 1: Runs All the Tests
+
+- Making our systems testable pushes us toward a design where our classes are small and single purpose.
+- The more tests we write, the more we’ll continue to push toward things that are simpler to test.
+- Tight coupling makes it difficult to write tests.
+
+### Simple Design Rule 2-4: Refactoring
+
+- The fact that we have these tests eliminates the fear that cleaning up the code will break it!
+- We can increase cohesion, decrease coupling, separate concerns, modularize system concerns, shrink our functions and classes, choose better names, and so on.
+- This is also where we apply the final three rules of simple design: Eliminate duplication, ensure expressiveness, and minimize the number of classes and methods.
+
+### No Duplication
+
+- Duplication causes additional work, additional risk, and additional unnecessary complexity.
+- Creating a clean system requires the will to eliminate duplication, even in just a few lines of code.
+
+### Expressive
+
+- It is easy to write code we undestand, because we understand the problem we're trying to solve at that time but other maintainers don't.
+- You can express yourself by choosing good names. We want to be able to hear a class or function name and not be surprised when we discover its responsibilities.
+- You can also express yourself by keeping your functions and classes small. Small classes and functions are usually easy to name, easy to write, and easy to understand.
+- You can also express yourself by using standard nomenclature. Design patterns, for example, are largely about communication and expressiveness.
+- Well-written unit tests are also expressive. A primary goal of tests is to act as documentation by example. Someone reading our tests should be able to get a quick understanding of what a class is all about.
+- But the most important way to be expressive is to try.
+
+### Minical Classes and Methods
