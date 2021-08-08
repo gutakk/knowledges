@@ -751,4 +751,74 @@ According to Kent Beck, a design is "simple" if it follows these rules (The rule
 - Well-written unit tests are also expressive. A primary goal of tests is to act as documentation by example. Someone reading our tests should be able to get a quick understanding of what a class is all about.
 - But the most important way to be expressive is to try.
 
-### Minical Classes and Methods
+## Chapter 13 - Concurrency
+
+“Objects are abstractions of processing. Threads are abstractions of schedule.”
+
+### Why Concurrency?
+
+- Concurrency is a decoupling strategy. It helps us decouple `what` gets done from `when` it gets done.
+- In single-threaded applications `what` and `when` are so strongly coupled that the state of the entire application can often be determined by looking at the stack backtrace.
+- Consider a system that handles one user at a time and requires only one second of time per user. This system is fairly responsive for a few users, but as the number of users increases, the system’s response time increases. No user wants to get in line behind 150 others! We could improve the response time of this system by handling many users concurrently.
+
+#### Myths and Misconceptions
+
+Concurrency is `hard`. If you aren’t very careful, you can create some very nasty situations. Consider these common myths and misconceptions:
+- Concurrency always improves performance. Not always!, concurrency can sometimes improve performance, but only when there is a lot of wait time that can be shared between multiple threads or multiple processors.
+- Design does not change when writing concurrent programs. Not true!, In fact, the design of a concurrent algorithm can be remarkably different from the design of a single-threaded system. The decoupling of what from when usually has a huge effect on the structure of the system.
+- Understanding concurrency issues is not important when working with a container such as a Web or EJB container. Still not true!, In fact, you’d better know just what your container is doing and how to guard against the issues of concurrent update and deadlock.
+
+Here are a few more balanced sound bites regarding writing concurrent software:
+- Concurrency incurs some overhead, both in performance as well as writing additional code.
+- Correct concurrency is complex, even for simple problems.
+- Concurrency bugs aren’t usually repeatable, so they are often ignored as one-offs2 instead of the true defects they are.
+- Concurrency often requires a fundamental change in design strategy.
+
+### Concurrency Defense Principles
+
+#### Single Responsibility Principle
+
+Keep your concurrency-related code separate from other code.
+
+#### Corollary: Limit the Scope of Data
+
+Take data encapsulation to heart, severely limit the access of any data that may be shared.
+
+#### Corollary: Use Copies of Data
+
+- In some situations it is possible to copy objects and treat them as read-only.
+- In other cases it might be possible to copy objects, collect results from multiple threads in these copies and then merge the results in a single thread.
+
+#### Corollary: Theads Should Be as Independent as Possible
+
+Consider writing your threaded code such that each thread exists in its own world, sharing no data with any other thread. Each thread processes one client request, with all of its required data coming from an unshared source and stored as local variables.
+
+### Beware Dependencies Between Synchronized Methods
+
+Avoid using more than one method on a shared object but there will be times when you must use more than one method on a shared object. When this is the case, there are three ways to make the code correct:
+- **Client-Based Locking**: Have the client lock the server before calling the first method and make sure the lock’s extent includes code calling the last method.
+- **Server-Based Locking**: Within the server create a method that locks the server, calls all the methods, and then unlocks. Have the client call the new method.
+- **Adapted Server**: Create an intermediary that performs the locking. This is an example of server-based locking, where the original server cannot be changed.
+
+### Keep Synchronized Sections Small
+
+### Writing Correct Shut-Down Code Is Hard
+
+Think about shut-down early and get it working early. It’s going to take longer than you expect. Review existing algorithms because this is probably harder than you think.
+
+### Testing Threaded Code
+
+- Write tests that have the potential to expose problems and then run them frequently, with different programatic configurations and system configurations and load. If tests ever fail, track down the failure. Don’t ignore a failure just because the tests pass on a subsequent run.
+- Treat spurious failures as candidate threading issues. Do not ignore system failures as one-offs.
+- Get your nonthreaded code working first. Do not try to chase down nonthreading bugs and threading bugs at the same time. Make sure your code works outside of threads.
+- Make your threaded code pluggable. Make your thread-based code especially pluggable so that you can run it in various configurations.
+- Make your threaded code tunable.
+- Run with more threads than processors.
+- Run on different platforms. Run your threaded code on all target platforms early and often.
+- Instrument your code to try and force failures.
+
+## Chapter 14 - 16
+
+These 3 chapters are Java code example and case studies
+
+## Chapter 17 - Smells and Heuristics
